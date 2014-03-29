@@ -2,8 +2,8 @@ ZF2 Lucene Search Module
 Nigel Lundsten
 Mar 28 2014
 
+Provides basic search and index with Lucene
 
-NOTE: 
 - zendsearch is not currently in packagist
 - this module is not currently in packagist
 - composer wont resolve nested dependencies that are not on packagist if their repo is not defined in the root composer.json
@@ -28,7 +28,7 @@ you need to add these lines to the composer.json in the root of your project
 Quick Start / Demo:
 - add the lines above into your root composer.json
 - run composer update
-- _note_ default storage location for indexes is /dev/shm
+- *note* default storage location for indexes is /dev/shm
 - use temp route of /search/build-index to build an index from the example mapper data (this will be replaced later)
 
 How to Use:
