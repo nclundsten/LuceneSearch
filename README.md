@@ -1,6 +1,6 @@
 ZF2 Lucene Search Module
 Nigel Lundsten
-Mar 28 1014
+Mar 28 2014
 
 NOTE: 
 - zendsearch is not currently in packagist
