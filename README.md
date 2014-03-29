@@ -36,6 +36,5 @@ How to Use:
 
 Todo:
 - factories
-- easier modification of default config
 - build index route for console
 - lots of other misc
