@@ -28,7 +28,7 @@ you need to add these lines to the composer.json in the root of your project
 Quick Start / Demo:
 - add the lines above into your root composer.json
 - run composer update
-- *note* default storage location for indexes is /dev/shm
+- NOTE: default storage location for indexes is /dev/shm
 - use temp route of /search/build-index to build an index from the example mapper data (this will be replaced later)
 
 How to Use:
