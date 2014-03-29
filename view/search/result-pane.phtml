@@ -1,0 +1,28 @@
+<?php
+$paginationPartial = $this->paginationPartial ?: 'search/result-pane-pagination';
+$resultPartial = $this->resultPartial ?: 'search/result-pane-row-' . $this->name;
+$opts = json_encode($this->options->__toArray());
+?>
+<div class="result-pane" id="result-pane-<?=$this->name;?>" data-name="<?=$this->name;?>">
+    <?=$this->partial($paginationPartial, array(
+        'name'    => $this->name,
+        'results' => $this->results,
+        'options' => $this->options
+    ));?>
+    <div class="results">
+        <?php foreach($this->results as $result) : ?>
+            <?=$this->partial($resultPartial, array('row' => $result));?>
+        <?php endforeach; ?>
+    </div>
+    <?=$this->partial($paginationPartial, array(
+        'name'    => $this->name,
+        'results' => $this->results,
+        'options' => $this->options
+    ));?>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        window.searchoptions.<?=$this->name;?> = <?=$opts;?>;
+    });
+</script>

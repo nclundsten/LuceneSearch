@@ -1,0 +1,67 @@
+<?php
+    //set up empty search options
+    $searchOptions = array();
+    foreach ($result as $name => $data) {
+        $searchOptions[$name] = [];
+    }
+    $optionsJson = json_encode($searchOptions);
+?>
+<div class="container interior">
+
+<div id="search-tabs" class="row">
+    <ul class="nav nav-tabs pledge-page">
+        <?php foreach ($result as $name => $data) : ?>
+            <li>
+                <a href="#tabs-<?=$name;?>" data-toggle="tab"><?=ucfirst($name); ?>(<?=$data['results']->getTotalItemCount();?>)</a>
+            </li>
+        <?php endforeach;?>
+        <li class="pull-right">
+            <form method="post">
+                <input type="text" name="query" value="<?=$this->query;?>"/>
+            </form>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <?php foreach ($result as $name => $data) : ?>
+            <div class="tab-pane fade" id="tabs-<?=$name;?>">
+                <?=$this->partial('search/result-pane', array(
+                    'name' => $name,
+                    'results' => $data['results'],
+                    'options' => $data['options'],
+                )); ?>
+            </div>
+        <?php endforeach;?>
+    </div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+window.searchoptions = <?=$optionsJson;?>;
+
+$(document).ready(function() {
+
+    function updateSearchPane(name, opts)
+    {
+        var str = decodeURIComponent($.param(opts));
+        $.ajax({
+            url: "/search/search-pane/" + name + '?' + str
+        }).done(function(html) {
+            $("#result-pane-" + name).html(html);
+        });
+    }
+    $("#search-tabs").on('click', 'a.page', function() {
+        var name = $(this).parents('.result-pane').data('name');
+        var opts = window.searchoptions[name];
+        opts['newpage'] = $(this).data('page');
+        updateSearchPane(name, opts);
+    });
+    $("#search-tabs").on('change', 'select.limit', function() {
+        var name = $(this).parents('.result-pane').data('name');
+        var opts = window.searchoptions[name];
+        opts['newlimit'] = $(this).val();
+        updateSearchPane(name, opts);
+    });
+});
+</script>

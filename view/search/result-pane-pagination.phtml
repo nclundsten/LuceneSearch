@@ -1,0 +1,44 @@
+<?php
+$count = $results->getTotalItemCount();
+?>
+
+<?php if ($count) {
+$range = array(
+    ($results->getCurrentPageNumber() - 1) * $results->getItemCountPerPage() + 1,
+    ($results->getCurrentPageNumber() - 1) * $results->getItemCountPerPage() + $results->getCurrentItemCount()
+);
+$prev = ($results->getCurrentPageNumber() > 1) ? $results->getCurrentPageNumber() - 1 : false;
+$next = ($range[1] < $count) ? $results->getCurrentPageNumber() + 1 : false;
+$limit = $this->options->limit();
+}?>
+<?php if ($count) :?>
+
+<div class="search-pane-pagination row" data-name="<?=$name;?>">
+    <div class="range col-md-2">
+        <?=implode('-', $range); ?> of <?=$count;?>
+    </div>
+    <div class="prev col-md-2">
+        <?php if ($prev) : ?>
+            <a href="#" data-page="<?=$prev;?>" class="page">prev</a>
+        <?php else : ?>
+            prev
+        <?php endif; ?>
+    </div>
+    <div class="page col-md-1"><strong><?=$results->getCurrentPageNumber();?></strong></div>
+    <div class="next col-md-2">
+        <?php if ($next) : ?>
+            <a href="#" data-page="<?=$next;?>" class="page">next</a>
+        <?php else : ?>
+            next
+        <?php endif; ?>
+    </div>
+    <div class="limit col-md-3">
+        <select class="limit">
+            <option value="10" <?= ($limit == 10) ? 'selected' : '' ;?>>10</option>
+            <option value="25" <?= ($limit == 25) ? 'selected' : '' ;?>>25</option>
+            <option value="100" <?= ($limit == 100) ? 'selected' : '' ;?>>100</option>
+        </select>
+    </div>
+</div>
+
+<?php endif; ?>
