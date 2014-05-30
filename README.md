@@ -12,6 +12,7 @@ includes some views and pagination controls for the main search route
 
 you need to add these lines to the composer.json in the root of your project
 
+```json
 "repositories": [
     {
         "type": "vcs",
@@ -26,6 +27,7 @@ you need to add these lines to the composer.json in the root of your project
     "zendframework/zendsearch" : "dev-master"
     "nclundsten/LuceneSearch"  : "dev-master"
 }
+```
 
 Quick Start / Demo:
 - add the lines above into your root composer.json
